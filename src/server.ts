@@ -12,9 +12,9 @@ const port = process.env.PORT || 3000;
 
 // Create a MySQL connection
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: process.env.DB_PASS,
-  password: process.env.DB_USER,
+  host: 'football-compendium-db',
+  user: 'admin1',
+  password: 'password1!',
   database: 'football'
 });
 

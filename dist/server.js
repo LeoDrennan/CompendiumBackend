@@ -13,9 +13,9 @@ const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
 // Create a MySQL connection
 const connection = mysql_1.default.createConnection({
-    host: 'localhost',
-    user: process.env.DB_PASS,
-    password: process.env.DB_USER,
+    host: 'football-compendium-db',
+    user: 'admin1',
+    password: 'password1!',
     database: 'football'
 });
 app.use(express_1.default.json());
