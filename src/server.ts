@@ -94,7 +94,6 @@ app.put("/update/:stadium_id", (req: Request, res: Response) => {
   const q = "UPDATE stadium SET `stadium_name` = ?, `capacity` = ? WHERE stadium_id = ?"
   const values: [string, number] = [req.body.stadium_name, req.body.capacity]
 
-
   connection.query(q,[...values, stadiumID], (err: Error, rows: any[]) => {
     if (err) {
       console.error('Error executing query:', err);
