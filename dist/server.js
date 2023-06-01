@@ -11,12 +11,16 @@ dotenv_1.default.config({ path: __dirname + `/../backend.env` });
 // Create an Express app
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
+var fs = require('fs');
 // Create a MySQL connection
 const connection = mysql_1.default.createConnection({
     host: 'football-compendium-db.mysql.database.azure.com',
     user: 'admin1',
     password: 'password1!',
-    database: 'football'
+    database: 'football',
+    ssl: {
+        ca: fs.readFileSync('dist/DigiCertGlobalRootCA.crt.pem')
+    }
 });
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());

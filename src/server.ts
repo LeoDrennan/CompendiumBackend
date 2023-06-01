@@ -9,13 +9,17 @@ dotenv.config({ path: __dirname + `/../backend.env` });
 const app = express();
 const port = process.env.PORT || 3000;
 
+var fs = require('fs');
 
 // Create a MySQL connection
 const connection = mysql.createConnection({
   host: 'football-compendium-db.mysql.database.azure.com',
   user: 'admin1',
   password: 'password1!',
-  database: 'football'
+  database: 'football',
+  ssl : {
+    ca : fs.readFileSync('dist/DigiCertGlobalRootCA.crt.pem')
+    }
 });
 
 app.use(express.json());
