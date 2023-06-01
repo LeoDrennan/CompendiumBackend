@@ -10,7 +10,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config({ path: __dirname + `/../backend.env` });
 // Create an Express app
 const app = (0, express_1.default)();
-const port = 3001;
+const port = 80;
 // Create a MySQL connection
 const connection = mysql_1.default.createConnection({
     host: 'localhost',

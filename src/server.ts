@@ -7,7 +7,7 @@ dotenv.config({ path: __dirname + `/../backend.env` });
 
 // Create an Express app
 const app = express();
-const port = 3001;
+const port = 80;
 
 
 // Create a MySQL connection
