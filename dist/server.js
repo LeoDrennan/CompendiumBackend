@@ -13,7 +13,7 @@ const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
 // Create a MySQL connection
 const connection = mysql_1.default.createConnection({
-    host: 'football-compendium-db',
+    host: 'football-compendium-db.mysql.database.azure.com',
     user: 'admin1',
     password: 'password1!',
     database: 'football'

@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000;
 
 // Create a MySQL connection
 const connection = mysql.createConnection({
-  host: 'football-compendium-db',
+  host: 'football-compendium-db.mysql.database.azure.com',
   user: 'admin1',
   password: 'password1!',
   database: 'football'
