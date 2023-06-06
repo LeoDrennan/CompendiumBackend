@@ -1,10 +1,10 @@
 import { Router, Request, Response } from "express";
-import mysql, { Connection } from 'mysql';
+import mysql from 'mysql';
 import cors from "cors";
 
 export const route = Router();
 var fs = require('fs');
-route.use(cors())
+route.use(cors({'Access-Control-Allow-Origin': '*'}))
 
 const connection = mysql.createConnection({
     host: 'football-compendium-db.mysql.database.azure.com',
