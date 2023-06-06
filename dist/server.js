@@ -10,6 +10,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config({ path: __dirname + `/../backend.env` });
 // Create an Express app
 const app = (0, express_1.default)();
+const router = require("./routes");
 const port = process.env.PORT || 3000;
 var fs = require('fs');
 // Create a MySQL connection
@@ -23,6 +24,7 @@ const connection = mysql_1.default.createConnection({
     }
 });
 app.use(express_1.default.json());
+app.use("/routes", router);
 app.use((0, cors_1.default)());
 // Connect to MySQL
 connection.connect((err) => {
@@ -31,72 +33,6 @@ connection.connect((err) => {
         return;
     }
     console.log('Connected to MySQL!');
-});
-// Get all stadiums
-app.get('/stadia', (req, res) => {
-    // Perform MySQL query
-    connection.query('SELECT * FROM stadium', (err, rows) => {
-        if (err) {
-            console.error('Error executing query:', err);
-            res.status(500).json({ error: 'Internal Server Error' });
-            return;
-        }
-        res.json(rows);
-    });
-});
-// Post stadium to database
-app.post('/add', (req, res) => {
-    // Perform MySQL query
-    const test = "INSERT INTO stadium (`stadium_name`,`capacity`) VALUES (?)";
-    const values = [req.body.stadium_name, req.body.capacity];
-    connection.query(test, [values], (err, rows) => {
-        if (err) {
-            console.error('Error executing query:', err);
-            res.status(500).json({ error: 'Internal Server Error' });
-            return;
-        }
-        return res.json("Stadium has been added!");
-    });
-});
-// Delete stadium
-app.delete("/stadia/:stadium_id", (req, res) => {
-    const stadiumID = req.params.stadium_id;
-    const q = "DELETE FROM stadium WHERE stadium_id = ?";
-    connection.query(q, [stadiumID], (err, rows) => {
-        if (err) {
-            console.error('Error executing query:', err);
-            res.status(500).json({ error: 'Internal Server Error' });
-            return;
-        }
-        return res.json("Stadium has been deleted!");
-    });
-});
-// Get individual stadium data for update form
-app.get("/update/:stadium_id", (req, res) => {
-    const stadiumID = req.params.stadium_id;
-    const q = "SELECT stadium_name, capacity FROM stadium WHERE stadium_id = ?";
-    connection.query(q, [stadiumID], (err, rows) => {
-        if (err) {
-            console.error('Error executing query:', err);
-            res.status(500).json({ error: 'Internal Server Error' });
-            return;
-        }
-        return res.json();
-    });
-});
-// Update stadium
-app.put("/update/:stadium_id", (req, res) => {
-    const stadiumID = req.params.stadium_id;
-    const q = "UPDATE stadium SET `stadium_name` = ?, `capacity` = ? WHERE stadium_id = ?";
-    const values = [req.body.stadium_name, req.body.capacity];
-    connection.query(q, [...values, stadiumID], (err, rows) => {
-        if (err) {
-            console.error('Error executing query:', err);
-            res.status(500).json({ error: 'Internal Server Error' });
-            return;
-        }
-        return res.json("Stadium has been updated!");
-    });
 });
 // Start the server
 app.listen(port, () => {
