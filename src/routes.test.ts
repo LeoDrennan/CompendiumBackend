@@ -1,13 +1,17 @@
 import axios from 'axios';
 
-const url = "footballcompendium.azurewebsites.net/stadia"
+const url = "https://compendiumBackend.azurewebsites.net/stadia"
 
-describe("The router", () => {
-    test("The get route", async () => {
+describe("Get all stadia", () => {
+    test("Ensure connection is made", async () => {
         const res = await axios.get(url)
 
         expect(res).toBeTruthy();
         expect(res.status).toBe(200);
-        expect(res.data).toEqual("hello")
+    })
+    test("Validate first table row", async () => {
+        const res = await axios.get(url)
+
+        expect(res.data[0].stadium_name).toBe("Old trafford")
     })
 })
