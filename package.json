@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
+    "build": "npx tsc",
     "test": "jest src/routes.test.ts"
   },
   "keywords": [],
